@@ -12,9 +12,10 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-
+    'editPasswordSuccess' => 'Password edit success!',
+    'empty' => 'Please enter email or password',
+    'login' => ':login is incorrect. Check data please',
     'failed' => 'These credentials do not match our records.',
     'password' => 'The provided password is incorrect.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-
 ];
