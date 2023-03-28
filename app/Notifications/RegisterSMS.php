@@ -12,9 +12,6 @@ class RegisterSMS extends Notification
 {
     use Queueable;
 
-    protected $user_login = 't79175432501';
-    protected $user_password = '610731';
-    protected $api_sms = 'http://api.prostor-sms.ru/messages/v2/send';
     private $password;
     private $phone;
 
@@ -33,13 +30,18 @@ class RegisterSMS extends Notification
     public function sendSMS(): int
     {
 //            https://prostor-sms.ru/smsapi/
-        $response = Http::withBasicAuth($this->user_login, $this->user_password)
-            ->get($this->api_sms, [
+        $response = Http::withBasicAuth(config('services.sms.login'), config('services.sms.password'))
+            ->get(config('services.sms.api_url'), [
                 'phone' => '+'.$this->phone,
-                'text' => 'Пароль: ' . $this->password . '
-Это ваш пароль для сайта BuyBliss.ru
-Запомните его и никому не показывайте!',
+                'text' => $this->smsText(),
             ]);
         return $response->status();
+    }
+
+    public function smsText(): string
+    {
+        return "Пароль: " . $this->password
+            . PHP_EOL . "Это ваш пароль для сайта BuyBliss.ru"
+            . PHP_EOL . "Запомните его и никому не показывайте!";
     }
 }
