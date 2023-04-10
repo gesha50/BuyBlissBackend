@@ -8,7 +8,6 @@ use App\Http\Requests\ProductCategory\UpdateProductCategoryRequest;
 use App\Http\Resources\ProductCategory\ProductCategoryCollection;
 use App\Http\Resources\ProductCategory\ProductCategoryResource;
 use App\Models\ProductCategory;
-use Golchha21\ReSmushIt\Facades\Optimize;
 use Illuminate\Support\Facades\Storage;
 
 class ProductCategoryController extends Controller
