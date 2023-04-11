@@ -17,6 +17,6 @@ class ProductSeeder extends Seeder
     {
         Product::factory()->count(10)->create();
         Product::factory()->hasProductCategories(3)->create();
-
+        Product::factory()->hasPriceChanges(5)->create();
     }
 }

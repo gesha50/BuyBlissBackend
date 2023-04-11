@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\v1\PriceChangesController;
 use App\Http\Controllers\v1\ProductCategoryController;
 use App\Http\Controllers\v1\ProductController;
 use App\Http\Controllers\v1\UserController;
@@ -21,21 +22,22 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('products', ProductController::class)->only([
-    'index', 'show'
-]);
+Route::apiResource('products', ProductController::class)
+    ->only(['index', 'show']);
 
-Route::resource('product-categories', ProductCategoryController::class)->only([
-    'index', 'show'
-]);
+Route::apiResource('product-categories', ProductCategoryController::class)
+    ->only(['index', 'show']);
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
-    Route::apiResource('product-categories', ProductCategoryController::class,)->only([
-        'create', 'store', 'update', 'destroy'
-    ]);
-    Route::apiResource('products', ProductController::class)->only([
-        'create', 'store', 'update', 'destroy'
-    ]);
+    Route::apiResource('product-categories', ProductCategoryController::class,)
+        ->only(['create', 'store', 'update', 'destroy']);
+    Route::apiResource('products', ProductController::class)
+        ->only(['create', 'store', 'update', 'destroy']);
+
+    //price-changes
+    Route::get('/price-changes/{product}', [PriceChangesController::class, 'show']);
+    Route::get('/price-changes/full/{product}', [PriceChangesController::class, 'showFull']);
+    Route::apiResource('price-changes', PriceChangesController::class);
 });
 
 // Auth
