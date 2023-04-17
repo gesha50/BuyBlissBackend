@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Colors;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePriceChangesRequest extends FormRequest
+class StoreColorRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,9 @@ class StorePriceChangesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'new_price' => 'integer|max:10',
-            'price_with_discount' => 'integer|max:10',
-            'discount_finish_at' => 'date_format:Y-m-d H:i:s',
-            'product_id' => 'exists:App\Models\Product,id'
+            'title' => 'required|max:255|unique:colors,title',
+            'img' => 'image',
+            'color_code' => 'max:100|unique:colors,color_code'
         ];
     }
 }

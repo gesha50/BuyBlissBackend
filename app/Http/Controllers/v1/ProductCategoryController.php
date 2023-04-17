@@ -38,7 +38,7 @@ class ProductCategoryController extends Controller
             $productCat->save();
         }
         return new ProductCategoryResource(
-            ProductCategory::with('products')->findOrFail($productCat->id)
+            ProductCategory::with('products')->find($productCat->id)
         );
     }
 

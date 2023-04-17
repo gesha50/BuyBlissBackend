@@ -22,4 +22,14 @@ class Product extends Model
     {
         return $this->hasMany(PriceChanges::class);
     }
+
+    public function sizes(): HasMany
+    {
+        return $this->hasMany(Size::class);
+    }
+
+    public function colors(): BelongsToMany
+    {
+        return $this->belongsToMany(Color::class);
+    }
 }

@@ -3,13 +3,11 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StorePriceChangesRequest;
-use App\Http\Requests\UpdatePriceChangesRequest;
-use App\Http\Resources\PriceChanges\PriceChangesCollection;
+use App\Http\Requests\PriceChanges\StorePriceChangesRequest;
+use App\Http\Requests\PriceChanges\UpdatePriceChangesRequest;
 use App\Http\Resources\PriceChanges\PriceChangesResource;
 use App\Models\PriceChanges;
 use App\Models\Product;
-use Illuminate\Http\Response;
 
 class PriceChangesController extends Controller
 {
@@ -31,7 +29,7 @@ class PriceChangesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param PriceChanges $priceChange
+     * @param Product $product
      * @return PriceChangesResource
      */
     public function showFull(Product $product): PriceChangesResource

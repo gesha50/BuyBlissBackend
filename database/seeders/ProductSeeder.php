@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Color;
+use App\Models\ColorCategory;
 use App\Models\Product;
-use App\Models\ProductCategory;
+use App\Models\Size;
 use Illuminate\Database\Seeder;
 
 class ProductSeeder extends Seeder
@@ -15,8 +17,19 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        Product::factory()->count(10)->create();
-        Product::factory()->hasProductCategories(3)->create();
-        Product::factory()->hasPriceChanges(5)->create();
+        $max = 10;
+        for($c=1; $c<=$max; $c++) {
+            $product = Product::factory()
+                ->hasProductCategories(3)
+                ->hasPriceChanges(5)
+                ->hasSizes(5)
+                ->create();
+
+            Size::factory()
+                ->count(5)
+                ->for($product)
+                ->hasPriceChangeSizes(5)
+                ->create();
+        }
     }
 }

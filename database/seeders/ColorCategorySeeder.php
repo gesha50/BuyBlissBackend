@@ -2,11 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\PriceChanges;
-use App\Models\Product;
+use App\Models\ColorCategory;
 use Illuminate\Database\Seeder;
 
-class PriceChangesSeeder extends Seeder
+class ColorCategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.

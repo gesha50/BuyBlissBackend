@@ -2,9 +2,10 @@
 
 namespace Database\Factories;
 
+use App\Models\ColorCategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ProductCategoryFactory extends Factory
+class ColorFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -14,11 +15,10 @@ class ProductCategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->unique(true)->words(3, true),
-            'slug' => $this->faker->unique(true)->words(3, true),
+            'title' => $this->faker->unique(true)->text(20),
+            'color_code' => $this->faker->unique(true)->text(20),
             'img' => null,
-            'product_category_id' => 0,
-            'level' => rand(0,1),
+            'color_category_id' => ColorCategory::factory(),
         ];
     }
 }

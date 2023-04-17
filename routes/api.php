@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\v1\ColorCategoryController;
+use App\Http\Controllers\v1\ColorController;
 use App\Http\Controllers\v1\PriceChangesController;
 use App\Http\Controllers\v1\ProductCategoryController;
 use App\Http\Controllers\v1\ProductController;
+use App\Http\Controllers\v1\SizeController;
 use App\Http\Controllers\v1\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +41,16 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/price-changes/{product}', [PriceChangesController::class, 'show']);
     Route::get('/price-changes/full/{product}', [PriceChangesController::class, 'showFull']);
     Route::apiResource('price-changes', PriceChangesController::class);
+
+    //sizes
+    Route::get('/sizes/{product}', [SizeController::class, 'show']);
+    Route::apiResource('sizes', SizeController::class);
+
+    // Color
+    Route::apiResource('color-categories', ColorCategoryController::class);
+    Route::apiResource('colors', ColorController::class);
+    Route::post('/colors/add-to-product/{product}', [ColorController::class, 'addColorToProduct']);
+
 });
 
 // Auth
