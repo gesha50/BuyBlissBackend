@@ -21,6 +21,7 @@ class ColorSeeder extends Seeder
             Color::factory()
                 ->count(4)
                 ->hasProducts(3)
+                ->hasPriceChangeColors(4)
                 ->create();
         }
     }

@@ -11,6 +11,7 @@ use App\Http\Resources\Colors\ColorResource;
 use App\Http\Resources\Product\ProductResource;
 use App\Models\Color;
 use App\Models\ColorCategory;
+use App\Models\PriceChangeColor;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -37,14 +38,23 @@ class ColorController extends Controller
      */
     public function store(StoreColorRequest $request): ColorResource
     {
-        $color = Color::create($request->all());
+        $color = Color::create($request->only(['title', 'color_code', 'color_category_id']));
         $colorCat = ColorCategory::find($request->color_category_id);
         $colorCat->colors()->save($color);
         if ($request->hasFile('img')){
             $color->img  = $request->file('img')->store($this->storageFolderName, 'public');
             $color->save();
         }
-        return new ColorResource(Color::with('colorCategory')->findOrFail($color->id));
+        if ($request->exists('extra_price')){
+            PriceChangeColor::create([
+                'extra_price' => $request->extra_price,
+                'color_id' => $color->id
+            ]);
+        }
+        return new ColorResource(
+            Color::with(['colorCategory', 'priceChangeColors', 'priceChangeColorsLast'])
+                ->find($color->id)
+        );
     }
 
     public function addColorToProduct(AddColorToProductRequest $request, Product $product): ProductResource
@@ -89,7 +99,16 @@ class ColorController extends Controller
             $color->img = $request->file('img')->store($this->storageFolderName, 'public');
             $color->save();
         }
-        return new ColorResource(Color::with('colorCategory')->findOrFail($color->id));
+        if ($request->exists('extra_price')){
+            PriceChangeColor::create([
+                'extra_price' => $request->extra_price,
+                'color_id' => $color->id
+            ]);
+        }
+        return new ColorResource(
+            Color::with(['colorCategory', 'priceChangeColors', 'priceChangeColorsLast'])
+                ->find($color->id)
+        );
     }
 
     /**

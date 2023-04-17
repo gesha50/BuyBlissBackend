@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ColorCategoryFactory extends Factory
+class PriceChangeColorFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -14,8 +14,7 @@ class ColorCategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->unique(true)->words(3, true),
-            'is_img' => $this->faker->boolean(80),
+            'extra_price' => $this->faker->numerify('#####.##')
         ];
     }
 }
