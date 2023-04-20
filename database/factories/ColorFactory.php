@@ -15,8 +15,8 @@ class ColorFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->unique(true)->text(20),
-            'color_code' => $this->faker->unique(true)->text(20),
+            'title' => $this->faker->unique(true)->words(3, true),
+            'color_code' => $this->faker->unique(true)->words(3, true),
             'img' => null,
             'color_category_id' => ColorCategory::factory(),
         ];

@@ -37,4 +37,9 @@ class Product extends Model
     {
         return $this->belongsToMany(ProductImage::class);
     }
+
+    public function feedbacks(): BelongsToMany
+    {
+        return $this->belongsToMany(Feedback::class);
+    }
 }

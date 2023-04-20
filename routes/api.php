@@ -4,6 +4,7 @@ use App\Http\Controllers\AdressController;
 use App\Http\Controllers\v1\AddressController;
 use App\Http\Controllers\v1\ColorCategoryController;
 use App\Http\Controllers\v1\ColorController;
+use App\Http\Controllers\v1\FeedbackController;
 use App\Http\Controllers\v1\PriceChangesController;
 use App\Http\Controllers\v1\ProductCategoryController;
 use App\Http\Controllers\v1\ProductController;
@@ -62,6 +63,10 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::get('addresses/all/{user}', [AddressController::class, 'showUser']);
         Route::apiResource('addresses', AddressController::class);
     });
+
+    //Feedback
+    Route::apiResource('feedbacks', FeedbackController::class);
+
 });
 
 // Auth
