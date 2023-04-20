@@ -30,6 +30,11 @@ class Product extends Model
 
     public function colors(): BelongsToMany
     {
-        return $this->belongsToMany(Color::class);
+        return $this->belongsToMany(Color::class)->using(ColorProduct::class);
+    }
+
+    public function productImages(): BelongsToMany
+    {
+        return $this->belongsToMany(ProductImage::class);
     }
 }

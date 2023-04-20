@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\AdressController;
+use App\Http\Controllers\v1\AddressController;
 use App\Http\Controllers\v1\ColorCategoryController;
 use App\Http\Controllers\v1\ColorController;
 use App\Http\Controllers\v1\PriceChangesController;
 use App\Http\Controllers\v1\ProductCategoryController;
 use App\Http\Controllers\v1\ProductController;
+use App\Http\Controllers\v1\ProductImageController;
 use App\Http\Controllers\v1\SizeController;
 use App\Http\Controllers\v1\UserController;
 use Illuminate\Http\Request;
@@ -32,10 +35,13 @@ Route::apiResource('product-categories', ProductCategoryController::class)
     ->only(['index', 'show']);
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
+
     Route::apiResource('product-categories', ProductCategoryController::class,)
         ->only(['create', 'store', 'update', 'destroy']);
     Route::apiResource('products', ProductController::class)
         ->only(['create', 'store', 'update', 'destroy']);
+    Route::apiResource('product-images', ProductImageController::class);
+    Route::get('product-images/{product}/all', [ProductImageController::class, 'showProductImages']);
 
     //price-changes
     Route::get('/price-changes/{product}', [PriceChangesController::class, 'show']);
@@ -51,6 +57,11 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::apiResource('colors', ColorController::class);
     Route::post('/colors/add-to-product/{product}', [ColorController::class, 'addColorToProduct']);
 
+    //User
+    Route::prefix('user/')->group(function () {
+        Route::get('addresses/all/{user}', [AddressController::class, 'showUser']);
+        Route::apiResource('addresses', AddressController::class);
+    });
 });
 
 // Auth
