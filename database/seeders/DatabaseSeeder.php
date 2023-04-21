@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             ColorCategorySeeder::class,
             ColorSeeder::class,
             FeedbackSeeder::class,
+            SpecificationCategorySeeder::class,
         ]);
     }
 }
