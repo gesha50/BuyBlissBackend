@@ -11,6 +11,7 @@ use App\Http\Controllers\v1\ProductController;
 use App\Http\Controllers\v1\ProductImageController;
 use App\Http\Controllers\v1\SizeController;
 use App\Http\Controllers\v1\SpecificationCategoryController;
+use App\Http\Controllers\v1\SpecificationController;
 use App\Http\Controllers\v1\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -68,7 +69,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     //Feedback
     Route::apiResource('feedbacks', FeedbackController::class);
 
-    // SpecificationCategory
+    // Specification
+    Route::apiResource('specifications', SpecificationController::class);
     Route::apiResource('specification-categories', SpecificationCategoryController::class);
 
 });

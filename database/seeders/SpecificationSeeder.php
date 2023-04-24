@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\SpecificationCategory;
+use App\Models\Specification;
 use Illuminate\Database\Seeder;
 
-class SpecificationCategorySeeder extends Seeder
+class SpecificationSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class SpecificationCategorySeeder extends Seeder
      */
     public function run()
     {
-        SpecificationCategory::factory()->hasSpecifications(2)->count(5)->create();
+        //
     }
 }
