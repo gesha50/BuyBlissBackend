@@ -42,4 +42,9 @@ class Product extends Model
     {
         return $this->belongsToMany(Feedback::class);
     }
+
+    public function specifications(): BelongsToMany
+    {
+        return $this->BelongsToMany(Specification::class, 'specification_product');
+    }
 }

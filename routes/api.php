@@ -74,7 +74,14 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::apiResource('specifications', SpecificationController::class);
     Route::apiResource('specification-categories', SpecificationCategoryController::class);
     Route::apiResource('specification-values', SpecificationValueController::class);
-
+    Route::post(
+        '/specifications/add-to-product/{product}',
+        [SpecificationController::class, 'addSpecificationToProduct']
+    );
+    Route::post(
+        '/specifications/delete-from-product/{product}',
+        [SpecificationController::class, 'deleteSpecificationFromProduct']
+    );
 });
 
 // Auth

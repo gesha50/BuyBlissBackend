@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Specification\AddSpecificationToProductRequest;
 use App\Http\Requests\Specification\StoreSpecificationRequest;
 use App\Http\Requests\Specification\UpdateSpecificationRequest;
+use App\Http\Resources\Product\ProductResource;
 use App\Http\Resources\Specification\SpecificationCollection;
 use App\Http\Resources\Specification\SpecificationResource;
+use App\Models\Product;
 use App\Models\Specification;
 use Illuminate\Support\Facades\Storage;
 
@@ -33,6 +36,48 @@ class SpecificationController extends Controller
     {
         $specification = Specification::create($request->all());
         return new SpecificationResource($specification);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param AddSpecificationToProductRequest $request
+     * @param Product $product
+     * @return ProductResource
+     */
+    public function addSpecificationToProduct(
+        AddSpecificationToProductRequest $request,
+        Product $product
+    ): ProductResource
+    {
+        foreach ($request->arr_specification_ids as $id) {
+            $product->specifications()->attach($id);
+        }
+        return new ProductResource(
+            Product::with(['productCategories', 'priceChanges', 'sizes', 'colors', 'specifications'])
+                ->find($product->id)
+        );
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param AddSpecificationToProductRequest $request
+     * @param Product $product
+     * @return ProductResource
+     */
+    public function deleteSpecificationFromProduct(
+        AddSpecificationToProductRequest $request,
+        Product $product
+    ): ProductResource
+    {
+        foreach ($request->arr_specification_ids as $id) {
+            $product->specifications()->detach($id);
+        }
+        return new ProductResource(
+            Product::with(['productCategories', 'priceChanges', 'sizes', 'colors', 'specifications'])
+                ->find($product->id)
+        );
     }
 
     /**
