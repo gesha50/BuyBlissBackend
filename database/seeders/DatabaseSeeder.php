@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             ColorSeeder::class,
             FeedbackSeeder::class,
             SpecificationCategorySeeder::class,
+            StatusSeeder::class,
         ]);
     }
 }
