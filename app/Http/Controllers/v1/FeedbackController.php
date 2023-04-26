@@ -60,6 +60,7 @@ class FeedbackController extends Controller
                 ? $request->stars
                 : $feedback->stars,
             'user_id' => $request->user_id ?: $feedback->user_id,
+            'order_id' => $request->order_id ?: $feedback->order_id,
             'product_id' => $request->product_id ?: $feedback->product_id,
         ]);
         return new FeedbackResource($feedback);

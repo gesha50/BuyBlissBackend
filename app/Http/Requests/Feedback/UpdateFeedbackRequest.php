@@ -28,6 +28,7 @@ class UpdateFeedbackRequest extends FormRequest
             'stars' => 'required|numeric|between:0,5.0',
             'description' => '',
             'user_id' => 'exists:App\Models\User,id',
+            'order_id' => 'exists:App\Models\Order,id',
             'product_id' => 'exists:App\Models\Product,id'
         ];
     }

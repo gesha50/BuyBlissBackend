@@ -24,6 +24,7 @@ class OrderSeeder extends Seeder
             ->for(DeliveryType::where('id', 1)->first())
             ->for(Address::factory())
             ->hasProducts(3)
+            ->hasFeedback(1)
             ->count(5)
             ->create();
     }

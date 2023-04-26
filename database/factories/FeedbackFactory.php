@@ -20,7 +20,8 @@ class FeedbackFactory extends Factory
             'description' => $this->faker->text(60),
             'stars' => $this->faker->numerify('#.#'),
             'user_id' => 1,
-            'product_id' => Product::factory()
+            'product_id' => Product::factory(),
+            'order_id' => null,
         ];
     }
 }
