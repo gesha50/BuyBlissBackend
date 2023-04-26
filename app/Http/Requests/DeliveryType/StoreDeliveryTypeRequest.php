@@ -24,7 +24,7 @@ class StoreDeliveryTypeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|max:255|unique:payment_types,title',
+            'title' => 'required|max:255|unique:delivery_types,title',
             'is_main' => 'boolean'
         ];
     }

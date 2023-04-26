@@ -4,7 +4,9 @@ use App\Http\Controllers\AdressController;
 use App\Http\Controllers\v1\AddressController;
 use App\Http\Controllers\v1\ColorCategoryController;
 use App\Http\Controllers\v1\ColorController;
+use App\Http\Controllers\v1\DeliveryTypeController;
 use App\Http\Controllers\v1\FeedbackController;
+use App\Http\Controllers\v1\PaymentTypeController;
 use App\Http\Controllers\v1\PriceChangesController;
 use App\Http\Controllers\v1\ProductCategoryController;
 use App\Http\Controllers\v1\ProductController;
@@ -82,6 +84,11 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         '/specifications/delete-from-product/{product}',
         [SpecificationController::class, 'deleteSpecificationFromProduct']
     );
+
+    //Order
+    Route::apiResource('delivery-types', DeliveryTypeController::class);
+    Route::apiResource('payment-types', PaymentTypeController::class);
+
 });
 
 // Auth

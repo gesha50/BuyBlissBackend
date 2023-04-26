@@ -29,7 +29,7 @@ class UpdateDeliveryTypeRequest extends FormRequest
     {
         return [
             'title' => ['max:255',
-                Rule::unique('payment_types')
+                Rule::unique('delivery_types')
                     ->ignore(DeliveryType::where('id', $request->id)->first()->id)
             ],
             'is_main' => 'boolean'
