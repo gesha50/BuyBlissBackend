@@ -6,6 +6,7 @@ use App\Http\Controllers\v1\ColorCategoryController;
 use App\Http\Controllers\v1\ColorController;
 use App\Http\Controllers\v1\DeliveryTypeController;
 use App\Http\Controllers\v1\FeedbackController;
+use App\Http\Controllers\v1\OrderController;
 use App\Http\Controllers\v1\PaymentTypeController;
 use App\Http\Controllers\v1\PriceChangesController;
 use App\Http\Controllers\v1\ProductCategoryController;
@@ -86,6 +87,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     );
 
     //Order
+    Route::apiResource('orders', OrderController::class);
     Route::apiResource('delivery-types', DeliveryTypeController::class);
     Route::apiResource('payment-types', PaymentTypeController::class);
 

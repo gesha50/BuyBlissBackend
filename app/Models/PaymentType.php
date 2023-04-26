@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class PaymentType extends Model
 {
@@ -11,4 +12,8 @@ class PaymentType extends Model
 
     protected $guarded = [];
 
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
 }

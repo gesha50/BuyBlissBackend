@@ -28,6 +28,7 @@ class CreateAddressesTable extends Migration
             $table->boolean('is_main')->default(false);
 
             $table->foreignId('user_id')
+                ->nullable()
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();

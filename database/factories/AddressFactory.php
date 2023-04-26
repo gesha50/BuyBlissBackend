@@ -25,7 +25,7 @@ class AddressFactory extends Factory
             'flat' => $this->faker->numerify('###'),
             'is_private_house' => $this->faker->boolean,
             'is_main' => $this->faker->boolean,
-            'user_id' => User::factory()
+            'user_id' => null
         ];
     }
 }

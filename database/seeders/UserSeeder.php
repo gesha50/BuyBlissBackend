@@ -2,6 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Address;
+use App\Models\DeliveryType;
+use App\Models\Order;
+use App\Models\PaymentType;
+use App\Models\Status;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 

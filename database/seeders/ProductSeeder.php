@@ -28,6 +28,7 @@ class ProductSeeder extends Seeder
                 ->hasPriceChanges(5)
                 ->hasSizes(5)
                 ->hasSpecifications(3)
+                ->hasOrders(4)
                 ->create();
 
             Size::factory()
