@@ -11,7 +11,7 @@ class PaymentTypeSeeder extends Seeder
         'cash_upon_receipt',
         'online',
         'card_upon_receipt',
-        'transfer to card'
+        'transfer_to_card'
     ];
 
     /**
