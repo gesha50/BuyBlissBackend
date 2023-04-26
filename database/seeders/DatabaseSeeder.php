@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             FeedbackSeeder::class,
             SpecificationCategorySeeder::class,
             StatusSeeder::class,
+            PaymentTypeSeeder::class,
         ]);
     }
 }
