@@ -55,7 +55,7 @@ class PaymentTypeController extends Controller
     {
         $paymentType->update([
             'title' => $request->title ?: $paymentType->title,
-            'is_main' => $request->is_main ?: $paymentType->is_main,
+            'is_main' => $request->exists('is_main') ? $request->is_main : $paymentType->is_main,
         ]);
         return new PaymentTypeResource($paymentType);
     }

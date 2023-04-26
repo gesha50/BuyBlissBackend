@@ -74,8 +74,12 @@ class ProductImageController extends Controller
     {
         $productImage->update([
             'title' => $request->title ?: $productImage->title,
-            'is_poster' => $request->is_poster ?: $productImage->is_poster,
-            'is_universal' => $request->is_universal ?: $productImage->is_universal,
+            'is_poster' => $request->exists('is_poster')
+                ? $request->is_poster
+                : $productImage->is_poster,
+            'is_universal' => $request->exists('is_universal')
+                ? $request->is_universal
+                : $productImage->is_universal,
             'product_id' => $request->product_id ?: $productImage->product_id,
             'color_product_id' => $request->color_product_id ?: $productImage->color_product_id,
         ]);

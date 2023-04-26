@@ -72,11 +72,13 @@ class AddressController extends Controller
             'city' => $request->city ?: $address->city,
             'street' => $request->street ?: $address->street,
             'house' => $request->house ?: $address->house,
-            'floor' => $request->floor ?: $address->floor,
+            'floor' => $request->exists('floor') ? $request->floor : $address->floor,
             'entrance' => $request->entrance ?: $address->entrance,
             'flat' => $request->flat ?: $address->flat,
-            'is_private_house' => $request->is_private_house ?: $address->is_private_house,
-            'is_main' => $request->is_main ?: $address->is_main,
+            'is_private_house' => $request->exists('is_private_house')
+                ? $request->is_private_house
+                : $address->is_private_house,
+            'is_main' => $request->exists('is_main') ? $request->is_main : $address->is_main,
             'user_id' => $request->user_id ?: $address->user_id,
         ]);
         return new AddressCollection(Address::where('user_id', Auth::user()->id)->get());

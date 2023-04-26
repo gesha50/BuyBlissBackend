@@ -70,7 +70,7 @@ class ProductCategoryController extends Controller
         $productCategory->update([
             'title' => $request->title ?: $productCategory->title,
             'slug' => $request->slug ?: $productCategory->slug,
-            'level' => $request->level ?: $productCategory->level,
+            'level' => $request->exists('level') ? $request->level : $productCategory->level,
             'product_category_id' => $request->product_category_id ?: $productCategory->product_category_id,
         ]);
         if ($request->hasFile('img')){

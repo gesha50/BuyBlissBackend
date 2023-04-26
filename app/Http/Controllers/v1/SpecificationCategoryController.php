@@ -58,7 +58,7 @@ class SpecificationCategoryController extends Controller
     {
         $specificationCategory->update([
             'title' => $request->title ?: $specificationCategory->title,
-            'is_img' => $request->is_img ?: $specificationCategory->is_img,
+            'is_img' => $request->exists('is_img') ? $request->is_img : $specificationCategory->is_img,
         ]);
         return new SpecificationCategoryResource($specificationCategory);
     }

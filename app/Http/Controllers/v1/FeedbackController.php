@@ -56,7 +56,9 @@ class FeedbackController extends Controller
         $feedback->update([
             'name' => $request->name ?: $feedback->name,
             'description' => $request->description ?: $feedback->description,
-            'stars' => $request->stars ?: $feedback->stars,
+            'stars' => $request->exists('stars')
+                ? $request->stars
+                : $feedback->stars,
             'user_id' => $request->user_id ?: $feedback->user_id,
             'product_id' => $request->product_id ?: $feedback->product_id,
         ]);

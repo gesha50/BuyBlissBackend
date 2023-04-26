@@ -106,7 +106,7 @@ class SpecificationController extends Controller
                 $request->specification_category_id
                 ?: $specification->specification_category_id,
             'type' => $request->type ?: $specification->type,
-            'is_filter' => $request->is_filter ?: $specification->is_filter,
+            'is_filter' => $request->exists('is_filter') ? $request->is_filter : $specification->is_filter,
         ]);
         return new SpecificationResource($specification);
     }

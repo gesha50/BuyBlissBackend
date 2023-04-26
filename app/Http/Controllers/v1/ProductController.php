@@ -60,8 +60,12 @@ class ProductController extends Controller
             'full_description' => $request->full_description ?: $product->full_description,
             'meta_title' => $request->meta_title ?: $product->meta_title,
             'meta_description' => $request->meta_description ?: $product->meta_description,
-            'is_active' => $request->is_active ?: $product->is_active,
-            'is_error' => $request->is_error ?: $product->is_error,
+            'is_active' => $request->exists('is_active')
+                ? $request->is_active
+                : $product->is_active,
+            'is_error' => $request->exists('is_error')
+                ? $request->is_error
+                : $product->is_error,
         ]);
         return new ProductResource(Product::with('productCategories')->findOrFail($product->id));
     }

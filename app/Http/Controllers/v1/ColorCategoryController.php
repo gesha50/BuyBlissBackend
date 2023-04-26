@@ -55,7 +55,9 @@ class ColorCategoryController extends Controller
     {
         $colorCategory->update([
             'title' => $request->title ?: $colorCategory->title,
-            'is_img' => $request->is_img ?: $colorCategory->is_img,
+            'is_img' => $request->exists('is_img')
+                ? $request->is_img
+                : $colorCategory->is_img,
         ]);
         return new ColorCategoryResource(ColorCategory::find($colorCategory->id));
     }

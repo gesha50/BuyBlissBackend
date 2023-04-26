@@ -55,7 +55,7 @@ class DeliveryTypeController extends Controller
     {
         $deliveryType->update([
             'title' => $request->title ?: $deliveryType->title,
-            'is_main' => $request->is_main ?: $deliveryType->is_main,
+            'is_main' => $request->exists('is_main') ? $request->is_main : $deliveryType->is_main,
         ]);
         return new DeliveryTypeResource($deliveryType);
     }

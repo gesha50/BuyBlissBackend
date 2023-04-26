@@ -60,9 +60,9 @@ class SizeController extends Controller
     {
         $size->update([
             'title' => $request->title ?: $size->title,
-            'length' => $request->length ?: $size->length,
-            'width' => $request->width ?: $size->width,
-            'height' => $request->height ?: $size->height,
+            'length' => $request->exists('length') ? $request->length : $size->length,
+            'width' => $request->exists('width') ? $request->width : $size->width,
+            'height' => $request->exists('height') ? $request->height : $size->height,
             'product_id' => $request->product_id ?: $size->product_id,
         ]);
         if ($request->exists('extra_price')){
