@@ -11,6 +11,18 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
+    protected $relationsArr = [
+        'productCategories',
+        'priceChanges',
+        'sizes.priceChangeSizes',
+        'colors.colorCategory',
+        'colors.priceChangeColors',
+        'productImages.colorProduct',
+        'feedbacks.user',
+        'specifications.specificationCategory',
+        'specifications.specificationValues',
+        'orders'
+    ];
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +30,7 @@ class ProductController extends Controller
      */
     public function index(): ProductCollection
     {
-        return new ProductCollection(Product::with('productCategories')->get());
+        return new ProductCollection(Product::with($this->relationsArr)->get());
     }
 
     /**
@@ -30,7 +42,7 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request): ProductResource
     {
         $product = Product::create($request->all());
-        return new ProductResource(Product::with('productCategories')->findOrFail($product->id));
+        return $this->returnResource($product);
     }
 
     /**
@@ -41,7 +53,7 @@ class ProductController extends Controller
      */
     public function show(Product $product): ProductResource
     {
-        return new ProductResource(Product::with('productCategories')->findOrFail($product->id));
+        return $this->returnResource($product);
     }
 
     /**
@@ -67,7 +79,7 @@ class ProductController extends Controller
                 ? $request->is_error
                 : $product->is_error,
         ]);
-        return new ProductResource(Product::with('productCategories')->findOrFail($product->id));
+        return $this->returnResource($product);
     }
 
     /**
@@ -83,5 +95,10 @@ class ProductController extends Controller
             'success'=> true,
             'message' => 'delete success'
         ];
+    }
+
+    public function returnResource($product): ProductResource
+    {
+        return new ProductResource(Product::with($this->relationsArr)->findOrFail($product->id));
     }
 }

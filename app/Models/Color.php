@@ -14,6 +14,13 @@ class Color extends Model
 
     protected $guarded = [];
 
+    protected $appends = ['last_price_change_color'];
+
+    public function getLastPriceChangeColorAttribute()
+    {
+        return $this->priceChangeColors->last();
+    }
+
     public function colorCategory(): BelongsTo
     {
         return $this->belongsTo(ColorCategory::class);
@@ -27,11 +34,6 @@ class Color extends Model
     public function priceChangeColors(): HasMany
     {
         return $this->hasMany(PriceChangeColor::class);
-    }
-
-    public function priceChangeColorsLast(): HasMany
-    {
-        return $this->hasMany(PriceChangeColor::class)->latest('id')->limit(1);
     }
 
 }

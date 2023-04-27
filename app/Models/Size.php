@@ -13,6 +13,13 @@ class Size extends Model
 
     protected $guarded = [];
 
+    protected $appends = ['last_price_change_size'];
+
+    public function getLastPriceChangeSizeAttribute()
+    {
+        return $this->priceChangeSizes->last();
+    }
+
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
@@ -21,10 +28,5 @@ class Size extends Model
     public function priceChangeSizes(): HasMany
     {
         return $this->hasMany(PriceChangeSize::class);
-    }
-
-    public function priceChangeSizesLast(): HasMany
-    {
-        return $this->hasMany(PriceChangeSize::class)->latest('id')->limit(1);
     }
 }

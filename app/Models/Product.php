@@ -13,6 +13,13 @@ class Product extends Model
 
     protected $guarded = [];
 
+    protected $appends = ['last_price_change'];
+
+    public function getLastPriceChangeAttribute()
+    {
+        return $this->priceChanges->last();
+    }
+
     public function productCategories(): BelongsToMany
     {
         return $this->belongsToMany(ProductCategory::class, 'product_product_categories');
@@ -33,14 +40,14 @@ class Product extends Model
         return $this->belongsToMany(Color::class)->using(ColorProduct::class);
     }
 
-    public function productImages(): BelongsToMany
+    public function productImages(): hasMany
     {
-        return $this->belongsToMany(ProductImage::class);
+        return $this->hasMany(ProductImage::class);
     }
 
-    public function feedbacks(): BelongsToMany
+    public function feedbacks(): hasMany
     {
-        return $this->belongsToMany(Feedback::class);
+        return $this->hasMany(Feedback::class);
     }
 
     public function specifications(): BelongsToMany
